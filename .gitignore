@@ -20,3 +20,4 @@
 *.nb-gradle-properties
 
 target/
+dependency-reduced-pom.xml
