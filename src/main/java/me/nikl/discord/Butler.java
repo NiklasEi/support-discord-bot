@@ -1,4 +1,4 @@
-package me.nikl.discordbot;
+package me.nikl.discord;
 
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
@@ -8,7 +8,6 @@ import net.dv8tion.jda.core.entities.Game;
 import javax.security.auth.login.LoginException;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -16,14 +15,14 @@ import java.util.Properties;
 /**
  * @author Niklas Eicker
  */
-public class Bot {
-    private static Bot instance;
+public class Butler {
+    private static Butler instance;
     private static String token;
     private static JDA api;
 
     public static void main(String [] arguments) {
         loadConfig();
-        instance = new Bot();
+        instance = new Butler();
         try {
             api = new JDABuilder(AccountType.BOT)
                     .setToken(token)

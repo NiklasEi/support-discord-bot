@@ -4,13 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>me.nikl</groupId>
-    <artifactId>discord-bot</artifactId>
+    <groupId>me.nikl.discord</groupId>
+    <artifactId>butler-bot</artifactId>
     <version>1.0.0</version>
 
     <build>
         <defaultGoal>clean package</defaultGoal>
-        <finalName>DiscordBot</finalName>
+        <finalName>NiklsButler</finalName>
         <sourceDirectory>src/main/java</sourceDirectory>
         <directory>target</directory>
         <plugins>
@@ -21,7 +21,7 @@
                 <configuration>
                     <archive>
                        <manifest>
-                            <mainClass>me.nikl.discordbot.Bot</mainClass>
+                            <mainClass>me.nikl.discord.Butler</mainClass>
                         </manifest>
                    </archive>
                 </configuration>

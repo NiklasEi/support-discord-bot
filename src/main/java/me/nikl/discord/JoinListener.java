@@ -1,4 +1,4 @@
-package me.nikl.discordbot;
+package me.nikl.discord;
 
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Role;
@@ -19,8 +19,12 @@ public class JoinListener extends ListenerAdapter {
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
         if (event.getMember().getUser().isBot()) return;
         if (supportSeekers == null) grabSupportSeekersRole(event.getGuild());
-        if (event.getMember().getRoles().size() > 0) return;
+        if (event.getMember().getRoles().size() > 0) {
+            System.out.println(event.getMember().getNickname() + " already has a role...");
+            return;
+        }
         guildController.addSingleRoleToMember(event.getMember(), supportSeekers).queue();
+        System.out.println("Gave " + event.getMember().getUser().getName() + " the role " + supportSeekers.getName());
     }
 
     private void grabSupportSeekersRole(Guild guild) {

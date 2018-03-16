@@ -1,4 +1,4 @@
-package me.nikl.discordbot;
+package me.nikl.discord;
 
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
@@ -7,14 +7,14 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
  * @author Niklas Eicker
  */
 public class ReadyListener extends ListenerAdapter {
-    private final Bot bot;
+    private final Butler butler;
 
-    public ReadyListener(Bot bot) {
-        this.bot = bot;
+    public ReadyListener(Butler butler) {
+        this.butler = butler;
     }
 
     @Override
     public void onReady(ReadyEvent event) {
-        bot.enable();
+        butler.enable();
     }
 }
