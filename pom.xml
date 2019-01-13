@@ -8,6 +8,11 @@
     <artifactId>butler-bot</artifactId>
     <version>1.0.0</version>
 
+    <scm>
+        <connection>git@github.com:NiklasEi/support-discord-bot.git</connection>
+        <url>https://github.com/NiklasEi/support-discord-bot</url>
+    </scm>
+
     <build>
         <defaultGoal>clean package</defaultGoal>
         <finalName>NiklsButler</finalName>
