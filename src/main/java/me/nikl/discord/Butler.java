@@ -18,6 +18,7 @@ import java.util.Properties;
 public class Butler {
     private static Butler instance;
     private static String token;
+    private static String blackListRaw;
     private static JDA api;
 
     public static void main(String [] arguments) {
@@ -54,14 +55,16 @@ public class Butler {
                 System.out.println("Please set a token in config.properties");
                 System.exit(1);
             }
+            blackListRaw = properties.getProperty("blacklist");
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
         }
     }
 
-    public void enable() {
+    void enable() {
         api.addEventListener(new JoinListener());
+        api.addEventListener(new GuildMessageListener(instance, blackListRaw));
         System.out.println("Butler is ready to serve!");
     }
 }
