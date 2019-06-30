@@ -27,7 +27,7 @@
                     <archive>
                        <manifest>
                             <mainClass>me.nikl.discord.Butler</mainClass>
-                        </manifest>
+                       </manifest>
                    </archive>
                 </configuration>
             </plugin>
@@ -35,19 +35,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>2.4</version>
-                <configuration>
-                    <artifactSet>
-                        <includes>
-                            <include>net.dv8tion:*</include>
-                            <include>com.squareup.*:*</include>
-                            <include>com.neovisionaries:nv-websocket-client</include>
-                            <include>org.slf4j:*</include>
-                            <include>org.apache.commons:commons-collections4</include>
-                            <include>net.sf.trove4j:trove4j</include>
-                            <include>org.json:json</include>
-                        </includes>
-                    </artifactSet>
-                </configuration>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -63,7 +50,7 @@
     <repositories>
         <repository> <!-- This repo fixes issues with transitive dependencies -->
             <id>jcenter</id>
-            <url>http://jcenter.bintray.com</url>
+            <url>https://jcenter.bintray.com</url>
         </repository>
     </repositories>
 
@@ -71,7 +58,7 @@
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
-            <version>3.5.1_348</version>
+            <version>4.BETA.0_16</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>

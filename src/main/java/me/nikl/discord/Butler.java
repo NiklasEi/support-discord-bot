@@ -1,9 +1,8 @@
 package me.nikl.discord;
 
-import net.dv8tion.jda.core.AccountType;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.JDABuilder;
-import net.dv8tion.jda.core.entities.Game;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
 
 import javax.security.auth.login.LoginException;
 import java.io.File;
@@ -25,12 +24,12 @@ public class Butler {
         loadConfig();
         instance = new Butler();
         try {
-            api = new JDABuilder(AccountType.BOT)
-                    .setToken(token)
-                    .addEventListener(new ReadyListener(instance))
-                    .setGame(Game.playing("Being a good boy"))
-                    .buildAsync();
-        } catch (LoginException e) {
+            api = new JDABuilder(token)
+                    .addEventListeners(new ReadyListener(instance))
+                    .setActivity(Activity.playing("Being a good boy"))
+                    .build();
+            api.awaitReady();
+        } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
             System.exit(1);
         }

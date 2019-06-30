@@ -1,10 +1,10 @@
 package me.nikl.discord;
 
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Role;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
-import net.dv8tion.jda.core.managers.GuildController;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.managers.GuildManager;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class JoinListener extends ListenerAdapter {
     private Role supportSeekers;
-    private GuildController guildController;
+    private GuildManager guildController;
 
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
@@ -23,12 +23,12 @@ public class JoinListener extends ListenerAdapter {
             System.out.println(event.getMember().getNickname() + " already has a role...");
             return;
         }
-        guildController.addSingleRoleToMember(event.getMember(), supportSeekers).queue();
+        guildController.getGuild().addRoleToMember(event.getMember(), supportSeekers).queue();
         System.out.println("Gave " + event.getMember().getUser().getName() + " the role " + supportSeekers.getName());
     }
 
     private void grabSupportSeekersRole(Guild guild) {
-        this.guildController = guild.getController();
+        this.guildController = guild.getManager();
         List<Role> roles = guild.getRolesByName("support seekers", true);
         if (roles == null || roles.isEmpty()) {
             System.out.println("Unable to grab the support seekers role");

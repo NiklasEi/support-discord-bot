@@ -1,7 +1,8 @@
 package me.nikl.discord;
 
-import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +16,7 @@ public class GuildMessageListener extends ListenerAdapter {
 
     public GuildMessageListener(Butler instance, String blackListRaw) {
         System.out.println("Blacklist: ");
-        blackList.addAll(Arrays.asList(blackListRaw.split(",")));
+        if(blackListRaw != null && !blackListRaw.isEmpty()) blackList.addAll(Arrays.asList(blackListRaw.replaceAll(" ", "").split(",")));
         for (String word : blackList) {
             System.out.println("    - " + word);
         }
@@ -24,11 +25,11 @@ public class GuildMessageListener extends ListenerAdapter {
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         if (event.getMember().getUser().isBot()) return;
-        //if (event.getMember().getPermissions().contains(Permission.BAN_MEMBERS)) return;
+        if (event.getMember().getPermissions().contains(Permission.BAN_MEMBERS)) return;
         if (isInBlacklist(event.getMessage().getContentStripped())) {
             System.out.println(event.getMember().getUser().getName() + " send message contained in blacklist!");
             System.out.println("Message was: " + event.getMessage().getContentStripped());
-            event.getGuild().getController().ban(event.getAuthor(), 1).queue();
+            event.getGuild().ban(event.getAuthor(), 1).queue();
         }
     }
 
