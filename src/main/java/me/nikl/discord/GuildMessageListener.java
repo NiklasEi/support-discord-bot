@@ -24,7 +24,8 @@ public class GuildMessageListener extends ListenerAdapter {
 
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-        if (event.getMember().getUser().isBot()) return;
+        // Member is null for webhook messages
+        if (event.getMember() == null || event.getMember().getUser().isBot()) return;
         if (event.getMember().getPermissions().contains(Permission.BAN_MEMBERS)) return;
         if (isInBlacklist(event.getMessage().getContentStripped())) {
             System.out.println(event.getMember().getUser().getName() + " send message contained in blacklist!");

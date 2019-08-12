@@ -18,9 +18,10 @@ public class JoinListener extends ListenerAdapter {
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
         if (event.getMember().getUser().isBot()) return;
+        System.out.println(event.getMember().getNickname() + " Joined...");
         if (supportSeekers == null) grabSupportSeekersRole(event.getGuild());
         if (event.getMember().getRoles().size() > 0) {
-            System.out.println(event.getMember().getNickname() + " already has a role...");
+            System.out.println(event.getMember().getNickname() + " already has a role.");
             return;
         }
         guildController.getGuild().addRoleToMember(event.getMember(), supportSeekers).queue();
