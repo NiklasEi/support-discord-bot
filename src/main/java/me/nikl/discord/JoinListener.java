@@ -11,6 +11,7 @@ import java.util.List;
  * @author Niklas Eicker
  */
 public class JoinListener extends ListenerAdapter {
+    private final String ROLE = "support seeker";
     private Role supportSeekers;
 
     @Override
@@ -31,7 +32,7 @@ public class JoinListener extends ListenerAdapter {
     }
 
     private void grabSupportSeekersRole(Guild guild) {
-        List<Role> roles = guild.getRolesByName("support seekers", true);
+        List<Role> roles = guild.getRolesByName(ROLE, true);
         if (roles == null || roles.isEmpty()) {
             System.out.println("Unable to grab the support seekers role");
             return;
