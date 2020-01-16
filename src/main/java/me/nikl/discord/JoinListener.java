@@ -19,16 +19,17 @@ public class JoinListener extends ListenerAdapter {
         if (event.getMember().getUser().isBot()) return;
         String name = event.getMember().getUser().getName();
         System.out.println(name + " joined...");
-        if (supportSeekers == null) grabSupportSeekersRole(event.getGuild());
         if (event.getMember().getRoles().size() > 0) {
             System.out.println(name + " already has a role.");
             return;
         }
-        event.getGuild().addRoleToMember(event.getMember(), supportSeekers).submit()
-        .whenComplete((s, error) -> {
-            if (error != null) error.printStackTrace();
-            else System.out.println("Gave " + name + " the role " + supportSeekers.getName());
-        });
+        try {
+            grabSupportSeekersRole(event.getGuild());
+            event.getGuild().addRoleToMember(event.getMember(), supportSeekers).complete();
+            System.out.println("Gave " + name + " the role " + supportSeekers.getName());
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
     private void grabSupportSeekersRole(Guild guild) {
